@@ -61,13 +61,27 @@ const calculator = function(a, operator, b) {
   });
   
   function equal(currentInput){
-    currentInput = calcDisplay.textContent
+    let numbers = [];
+    let operators = [];
+    currentInput = calcDisplay.textContent;
+    splitInput = currentInput.split(/[+/-*/]/);
+    splitInput.forEach(item => {
+      if(!NaN(item)) {
+        numbers.push(item);
+      } else if (["+", "-", "*", "/"].includes(item)){
+        operators.push(item);
+      }
+      let currentTotal = numbers[0];
+      numbers.reduce((accumulator, currentValue) => {
+        return accumulator + currentValue;
+      }, numbers[0])
+    })
   }
 
   equalsButton.addEventListener("click", equal);
 
 }
 
-console.log(operate(1 + 2));
+
 
 /* What is the goal of the operator buttons? They need to not only display the symbol when clicked but perform the operation when the equals sign is pressed */
